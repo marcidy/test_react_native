@@ -67,8 +67,8 @@ export default class BlazeApp extends Component {
                         onChangeText={(text) => this.setState({ password: text})}
                     /> 
                     <BlazeInput 
-                        placeholder="Bong name" callbackFromParent={this.setBondName}
-                        onChangeText={(text) => this.getVal(text)}
+                        placeholder="Bong name" callbackFromParent={this.setBongName}
+                        onChangeText={(text) => this.setState({ bongname: text})}
                     /> 
                 </View>
                 <View>
