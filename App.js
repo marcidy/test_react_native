@@ -10,7 +10,11 @@ import BlazeInput from './blazeInput';
 import BlazeSlider from './blazeSlider';
 
 const buttonPressed = () => {
-    console.log("shiiiiit");
+    console.log("button pressed");
+};
+
+const connect = () => {
+    console.log('BLE code to submit wifi params goes here');
 };
 
 export default class BlazeApp extends Component {
@@ -43,11 +47,39 @@ export default class BlazeApp extends Component {
 		return (
 			<View style={styles.container}>
                 <View>
+                    <BlazeInput callbackFromParent={this.setWiFiSSID}
+                        placeholder="WiFi SSID / Name"
+                        onChangeText={(ssid) => this.setState({ ssid: text })}
+                    /> 
+                    <BlazeInput callbackFromParent={this.setWiFiPass}
+                        style={{flexDirection: 'row'}}
+                        placeholder="WiFi Password"
+                        onChangeText={(text) => this.setState({ password: text})}
+                    /> 
+                    <Button
+                        title='Connect'
+                        buttonStyle={styles.connect}
+                        textColor={styles.squareColor}
+                        onPress={connect}
+                    />
+                    <BlazeInput 
+                        placeholder="Bong name" callbackFromParent={this.setBongName}
+                        onChangeText={(text) => this.setState({ bongname: text})}
+                    /> 
+                </View>
+                <View style={styles.outputbox}>
+                    <Text style={styles.output}> {this.state.ssid} </Text>
+                    <Text style={styles.output}> {this.state.password} </Text>
+                </View>
+                <View>
+                    <BlazeSlider />
+                </View>
+                <View>
                     <Button 
-                        onPress={buttonPressed}
                         title="b-Laze"
+                        onPress={buttonPressed}
                         color="#FF00FF"
-                        accessibilityLabel="poooop"
+                        accessibilityLabel="Turn laser on"
                     />
     
                     <Button
@@ -57,26 +89,6 @@ export default class BlazeApp extends Component {
                         onPress={buttonPressed}
                     />
                 </View>
-                <View>
-                    <BlazeInput callbackFromParent={this.setWiFiSSID}
-                        placeholder="WiFi SSID / Name"
-                        onChangeText={(ssid) => this.setState({ ssid: text })}
-                    /> 
-                    <BlazeInput callbackFromParent={this.setWiFiPass}
-                        placeholder="WiFi Password"
-                        onChangeText={(text) => this.setState({ password: text})}
-                    /> 
-                    <BlazeInput 
-                        placeholder="Bong name" callbackFromParent={this.setBongName}
-                        onChangeText={(text) => this.setState({ bongname: text})}
-                    /> 
-                </View>
-                <View>
-                    <Text style={styles.output}> {this.state.ssid} </Text>
-                    <Text style={styles.output}> {this.state.password} </Text>
-                    <Text>sadf {this.state.ssid} </Text>
-                </View>
-                <BlazeSlider />
             </View>
 		);
 	}
@@ -95,16 +107,29 @@ const styles = StyleSheet.create({
         backgroundColor: 'ivory',
         justifyContent: 'center',
         alignItems: 'center',
-        marginVertical: 15,
+        margin: 15,
+        padding: 20,
+        flex: 1,
+        flexDirection: 'row',
     },
     squareColor: {
         color: 'rebeccapurple',
         fontSize: 16,
+        flex: 1,
+        flexDirection: 'row',
     },
     output: {
         borderColor: 'black',
         height: 50,
         width: 300,
         color: 'red'
+    },
+    outputbox: {
+        backgroundColor: '#202020',
+    },
+    connect: {
+        backgroundColor: '#000000',
+        color: '#FF0000',
+        flexDirection: 'row',
     }
 });

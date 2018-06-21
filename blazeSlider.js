@@ -14,25 +14,29 @@ export default class BlazeSlider extends Component {
 
     getVal(val) {
         console.warn(val);
-        {/* This sets the speed over BT immediately */}
+        {/* put code here to set the speed over BT immediately */}
     }
 
     render() {
         return (
-            <View style={styles.container}>
-                <Slider
-                    style={styles.slider}
-                    step={1}
-                    minimumValue={1}
-                    maximumValue={5}
-                    value={this.state.speed}
-                    onValueChange={val => this.setState({ speed: val})}
-                    onSlidingComplete={ val => this.getVal(val)}
-                />
-            <Text style={styles.slidertext}>
-                {this.state.speed}
-            </Text>
-        </View>
+            <View>
+                <View style={styles.container}>
+                    <Slider
+                        style={styles.slider}
+                        step={1}
+                        minimumValue={1}
+                        maximumValue={5}
+                        value={this.state.speed}
+                        onValueChange={val => this.setState({ speed: val})}
+                        onSlidingComplete={ val => this.getVal(val)}
+                    />
+                </View>
+                <View>
+                    <Text style={styles.slidertext}>
+                        {this.state.speed}
+                    </Text>
+                </View>
+            </View>
         );
     }
 }
@@ -48,7 +52,6 @@ const styles = StyleSheet.create({
     },
     slidertext: {
         fontSize: 20,
-        textAlign: 'center',
         margin: 10,
     }
 });
